@@ -1,0 +1,221 @@
+  [1m[36m (41.3ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (3.5ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (2.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20150619212348)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (38.7ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "username" character varying, "password_digest" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150619212348"]]
+  [1m[36m (5.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateSurveys (20150619212505)
+  [1m[35m (6.5ms)[0m  BEGIN
+  [1m[36m (15.9ms)[0m  [1mCREATE TABLE "surveys" ("id" serial primary key, "title" character varying, "description" text, "creator_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150619212505"]]
+  [1m[36m (2.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreateQuestions (20150619212522)
+  [1m[35m (6.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[36m (7.7ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (6.9ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20150619212348)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (9.3ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "username" character varying, "password_digest" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150619212348"]]
+  [1m[36m (2.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateSurveys (20150619212505)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (9.0ms)[0m  [1mCREATE TABLE "surveys" ("id" serial primary key, "title" character varying, "description" text, "creator_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150619212505"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+Migrating to CreateQuestions (20150619212522)
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36m (8.7ms)[0m  [1mCREATE TABLE "questions" ("id" serial primary key, "survey_id" integer, "content" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150619212522"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+Migrating to CreateChoices (20150619212536)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (6.3ms)[0m  [1mCREATE TABLE "choices" ("id" serial primary key, "question_id" integer, "content" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150619212536"]]
+  [1m[36m (2.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateSelections (20150619212556)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.3ms)[0m  [1mCREATE TABLE "selections" ("id" serial primary key, "taker_id" integer, "choice_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150619212556"]]
+  [1m[36m (2.3ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCompletedsurveys (20150619212657)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (5.3ms)[0m  [1mCREATE TABLE "completedsurveys" ("id" serial primary key, "taker_id" integer, "survey_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150619212657"]]
+  [1m[36m (2.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.4ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (2.3ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'choices'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.7ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'completedsurveys'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.6ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'questions'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.6ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'selections'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (3.3ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'surveys'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (3.4ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36mUser Load (2.6ms)[0m  [1mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "users" ("username", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["username", "ilikefries@gmail.com"], ["password_digest", "blah blah"], ["created_at", "2015-06-19 21:52:52.973695"], ["updated_at", "2015-06-19 21:52:52.973695"]]
+  [1m[35m (5.4ms)[0m  COMMIT
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mSurvey Load (5.0ms)[0m  SELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1  [["creator_id", 1]]
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mSurvey Load (0.4ms)[0m  SELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1  [["creator_id", 1]]
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mSurvey Load (0.4ms)[0m  SELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1  [["creator_id", 1]]
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mSurvey Load (0.5ms)[0m  SELECT  "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1  ORDER BY "surveys"."id" ASC LIMIT 1  [["creator_id", 1]]
+  [1m[36mSurvey Load (0.6ms)[0m  [1mSELECT  "surveys".* FROM "surveys"  ORDER BY "surveys"."id" ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "surveys" ("title", "description", "creator_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "i hate making surveys"], ["description", "look at the title"], ["creator_id", 1], ["created_at", "2015-06-19 21:55:48.394679"], ["updated_at", "2015-06-19 21:55:48.394679"]]
+  [1m[35m (2.9ms)[0m  COMMIT
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mSurvey Load (0.5ms)[0m  SELECT  "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1  ORDER BY "surveys"."id" ASC LIMIT 1  [["creator_id", 1]]
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mSurvey Load (0.5ms)[0m  SELECT  "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1  ORDER BY "surveys"."id" ASC LIMIT 1  [["creator_id", 1]]
+  [1m[36mQuestion Load (5.3ms)[0m  [1mSELECT "questions".* FROM "questions" WHERE "questions"."survey_id" = $1[0m  [["survey_id", 1]]
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (1.1ms)[0m  [1mINSERT INTO "questions" ("survey_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_id", 1], ["content", "who is the current president?"], ["created_at", "2015-06-19 21:57:12.121272"], ["updated_at", "2015-06-19 21:57:12.121272"]]
+  [1m[35m (2.1ms)[0m  COMMIT
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mSurvey Load (0.5ms)[0m  SELECT  "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1  ORDER BY "surveys"."id" ASC LIMIT 1  [["creator_id", 1]]
+  [1m[36mQuestion Load (0.4ms)[0m  [1mSELECT  "questions".* FROM "questions" WHERE "questions"."survey_id" = $1  ORDER BY "questions"."id" ASC LIMIT 1[0m  [["survey_id", 1]]
+  [1m[35mChoice Load (3.3ms)[0m  SELECT "choices".* FROM "choices" WHERE "choices"."question_id" = $1  [["question_id", 1]]
+  [1m[36mUser Load (0.9ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mSurvey Load (0.7ms)[0m  SELECT  "surveys".* FROM "surveys"  ORDER BY "surveys"."id" ASC LIMIT 1
+  [1m[36mQuestion Load (0.7ms)[0m  [1mSELECT  "questions".* FROM "questions"  ORDER BY "questions"."id" ASC LIMIT 1[0m
+  [1m[35mSurvey Load (0.8ms)[0m  SELECT  "surveys".* FROM "surveys"  ORDER BY "surveys"."id" ASC LIMIT 1
+  [1m[36mSurvey Load (0.6ms)[0m  [1mSELECT  "surveys".* FROM "surveys"  ORDER BY "surveys"."id" ASC LIMIT 1[0m
+  [1m[35mSurvey Load (0.6ms)[0m  SELECT  "surveys".* FROM "surveys"  ORDER BY "surveys"."id" ASC LIMIT 1
+  [1m[36mSurvey Load (0.4ms)[0m  [1mSELECT  "surveys".* FROM "surveys"  ORDER BY "surveys"."id" ASC LIMIT 1[0m
+  [1m[35mSurvey Load (0.7ms)[0m  SELECT  "surveys".* FROM "surveys"  ORDER BY "surveys"."id" ASC LIMIT 1
+  [1m[36mSurvey Load (0.7ms)[0m  [1mSELECT  "surveys".* FROM "surveys"  ORDER BY "surveys"."id" ASC LIMIT 1[0m
+  [1m[35mSurvey Load (0.6ms)[0m  SELECT  "surveys".* FROM "surveys"  ORDER BY "surveys"."id" ASC LIMIT 1
+  [1m[36mSurvey Load (0.6ms)[0m  [1mSELECT  "surveys".* FROM "surveys"  ORDER BY "surveys"."id" ASC LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users"
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mSurvey Load (0.3ms)[0m  SELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1  [["creator_id", 1]]
+  [1m[36mSurvey Load (0.4ms)[0m  [1mSELECT  "surveys".* FROM "surveys" WHERE "surveys"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mSurvey Load (0.5ms)[0m  SELECT  "surveys".* FROM "surveys" WHERE "surveys"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mSurvey Load (0.5ms)[0m  [1mSELECT  "surveys".* FROM "surveys" WHERE "surveys"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mSurvey Load (0.5ms)[0m  [1mSELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1[0m  [["creator_id", 1]]
+  [1m[35mSurvey Load (0.9ms)[0m  SELECT  "surveys".* FROM "surveys" WHERE "surveys"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mSurvey Load (0.5ms)[0m  [1mSELECT  "surveys".* FROM "surveys" WHERE "surveys"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[36mSurvey Load (0.7ms)[0m  [1mSELECT  "surveys".* FROM "surveys"  ORDER BY "surveys"."id" ASC LIMIT 1[0m
+  [1m[35mSurvey Load (1.1ms)[0m  SELECT  "surveys".* FROM "surveys"  ORDER BY "surveys"."id" ASC LIMIT 1
+  [1m[36mSurvey Load (0.8ms)[0m  [1mSELECT  "surveys".* FROM "surveys"  ORDER BY "surveys"."id" ASC LIMIT 1[0m
+  [1m[35mSurvey Load (0.9ms)[0m  SELECT  "surveys".* FROM "surveys"  ORDER BY "surveys"."id" ASC LIMIT 1
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (12.8ms)[0m  [1mINSERT INTO "completedsurveys" ("survey_id", "taker_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_id", 1], ["taker_id", 1], ["created_at", "2015-06-19 22:46:25.309203"], ["updated_at", "2015-06-19 22:46:25.309203"]]
+  [1m[35m (9.0ms)[0m  COMMIT
+  [1m[36mCompletedsurvey Load (0.5ms)[0m  [1mSELECT  "completedsurveys".* FROM "completedsurveys"  ORDER BY "completedsurveys"."id" ASC LIMIT 1[0m
+  [1m[35mSurvey Load (0.2ms)[0m  SELECT  "surveys".* FROM "surveys" WHERE "surveys"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mCompletedsurvey Load (0.7ms)[0m  [1mSELECT  "completedsurveys".* FROM "completedsurveys"  ORDER BY "completedsurveys"."id" ASC LIMIT 1[0m
+  [1m[35mCompletedsurvey Load (0.6ms)[0m  SELECT  "completedsurveys".* FROM "completedsurveys"  ORDER BY "completedsurveys"."id" ASC LIMIT 1
+  [1m[36mCompletedsurvey Load (0.6ms)[0m  [1mSELECT  "completedsurveys".* FROM "completedsurveys"  ORDER BY "completedsurveys"."id" ASC LIMIT 1[0m
+  [1m[36mCompletedsurvey Load (0.8ms)[0m  [1mSELECT  "completedsurveys".* FROM "completedsurveys"  ORDER BY "completedsurveys"."id" ASC LIMIT 1[0m
+  [1m[35mUser Load (0.7ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mSurvey Load (0.5ms)[0m  [1mSELECT  "surveys".* FROM "surveys"  ORDER BY "surveys"."id" ASC LIMIT 1[0m
+  [1m[35mQuestion Load (0.3ms)[0m  SELECT "questions".* FROM "questions" WHERE "questions"."survey_id" = $1  [["survey_id", 1]]
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "choices" ("question_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["question_id", 1], ["content", "aldjfa;lkdfjl"], ["created_at", "2015-06-19 22:49:46.748063"], ["updated_at", "2015-06-19 22:49:46.748063"]]
+  [1m[36m (5.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mQuestion Load (0.7ms)[0m  SELECT  "questions".* FROM "questions"  ORDER BY "questions"."id" ASC LIMIT 1
+  [1m[36mChoice Load (0.4ms)[0m  [1mSELECT "choices".* FROM "choices" WHERE "choices"."question_id" = $1[0m  [["question_id", 1]]
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (2.5ms)[0m  [1mINSERT INTO "selections" ("taker_id", "choice_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["taker_id", 1], ["choice_id", 1], ["created_at", "2015-06-19 22:50:43.066150"], ["updated_at", "2015-06-19 22:50:43.066150"]]
+  [1m[35m (4.5ms)[0m  COMMIT
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+PG::UndefinedColumn: ERROR:  column selections.user_id does not exist
+LINE 1: SELECT "selections".* FROM "selections" WHERE "selections"."...
+                                                      ^
+: SELECT "selections".* FROM "selections" WHERE "selections"."user_id" = $1
+  [1m[35mSelection Load (0.8ms)[0m  SELECT  "selections".* FROM "selections"  ORDER BY "selections"."id" ASC LIMIT 1
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mSelection Load (0.7ms)[0m  SELECT  "selections".* FROM "selections"  ORDER BY "selections"."id" ASC LIMIT 1
+  [1m[36mSelection Load (0.6ms)[0m  [1mSELECT  "selections".* FROM "selections"  ORDER BY "selections"."id" ASC LIMIT 1[0m
+  [1m[35mChoice Load (0.4ms)[0m  SELECT  "choices".* FROM "choices" WHERE "choices"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+PG::UndefinedColumn: ERROR:  column selections.user_id does not exist
+LINE 1: SELECT "selections".* FROM "selections" WHERE "selections"."...
+                                                      ^
+: SELECT "selections".* FROM "selections" WHERE "selections"."user_id" = $1
+  [1m[35mUser Load (0.7ms)[0m  SELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1
+PG::UndefinedColumn: ERROR:  column selections.user_id does not exist
+LINE 1: SELECT "selections".* FROM "selections" WHERE "selections"."...
+                                                      ^
+: SELECT "selections".* FROM "selections" WHERE "selections"."user_id" = $1
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[36mUser Load (1.1ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mSelection Load (0.3ms)[0m  SELECT "selections".* FROM "selections" WHERE "selections"."taker_id" = $1  [["taker_id", 1]]
+  [1m[36mUser Load (0.8ms)[0m  [1mSELECT  "users".* FROM "users"  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35mChoice Load (0.7ms)[0m  SELECT "choices".* FROM "choices" INNER JOIN "selections" ON "choices"."id" = "selections"."choice_id" WHERE "selections"."taker_id" = $1  [["taker_id", 1]]
