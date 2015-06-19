@@ -23,8 +23,31 @@ Team Dynamic / Git Workflow:
 
   Mike: 
   
-  Julia:
+  - Users Model
+  - Users Controller 
+  - Users View
+  - Authentication
+  - Sessions Controller
+  - Sessions View
+  
+  Julia: 
+  
+  - Selections Model
+  - Survey Controller
+  - Survey View
+  - Survey Model
+  - Questions Model
+  - Question Controller
+  - Question View
+  - Routes
   
   Sihong: 
 
-
+  - Choices Model
+  - Choices Controller
+  - Choices View
+  - Completed Model
+  - Migrations
+    
+When a team member moves a task into review, the other members will review the code
+and decide if it should be merged. Will communicate any issues or successions with code. 
