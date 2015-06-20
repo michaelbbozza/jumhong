@@ -1,0 +1,8 @@
+<h4> AVAILABLE SURVEYS </h4>
+
+<% @surveys.each do |survey| %>
+  <ul>
+    <li> <%= link_to survey.title, survey %> <br>
+      <%= survey.description %> </li>
+  </ul>
+<% end %>
