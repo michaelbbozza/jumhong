@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :questions
   resources :choices
   resources :completedsurveys, only:[:new,:create,:show]
-  resources :users, only: [:new,:create,:show]
+  resources :users, only: [:new,:create,:show, :destroy]
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
