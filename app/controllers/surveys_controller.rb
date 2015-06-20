@@ -2,7 +2,7 @@ class SurveysController < ApplicationController
 
   def index
     @surveys = Survey.all
-    @user = User.find(session[:user_id])
+    # @user = User.find(session[:user_id])
   end
 
   def create
