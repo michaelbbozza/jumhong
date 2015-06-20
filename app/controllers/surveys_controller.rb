@@ -5,9 +5,16 @@ class SurveysController < ApplicationController
   end
 
   def create
+    @survey = Survey.new(survey_params)
+    if @survey.save
+      redirect_to surveys_path
+    else
+      render :new
+    end
   end
 
   def new
+    @survey = Survey.new
   end
 
   def edit
@@ -21,6 +28,12 @@ class SurveysController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  def survey_params
+    params.require(:survey).permit(:title, :description)
   end
 
 end
