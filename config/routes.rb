@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :surveys
+  resources :surveys do
+    resources :completedsurveys, only:[:index,:new,:create,:show]
+  end
   resources :questions
   resources :choices
-  resources :completedsurveys, only:[:new,:create,:show]
   resources :users, only: [:new,:create,:show, :destroy]
 
   get '/login' => 'sessions#new'
