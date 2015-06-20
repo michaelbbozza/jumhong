@@ -1,0 +1,8 @@
+<h4> EDIT THE TITLE AND DESCRIPTION OF YOUR SURVEY </h4>
+
+
+<%= form_for @survey do |f| %>
+  Title: <%= f.text_field :title %>
+  Description: <%= f.text_field :description %>
+  <%= f.submit "UPDATE" %>
+<% end %>
