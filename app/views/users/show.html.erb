@@ -2,7 +2,8 @@
 <% @user.surveys.each do |sur| %>
 <%= sur.title %><br>
 <% if sur.creator_id == session[:user_id] %>
-  <%= link_to "delete", survey_path(id: sur.id), method: :delete %><br><br>
+  <%= button_to "delete", survey_path(id: sur.id), method: :delete %>
+  <%= button_to "edit", edit_survey_path(id: sur.id), method: :get%><br><br>
   <% end %>
 <% end %>
 

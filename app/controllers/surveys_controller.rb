@@ -3,12 +3,13 @@ class SurveysController < ApplicationController
 
   def index
     @surveys = Survey.all
-    # @user = User.find(session[:user_id])
   end
 
   def create
     @survey = Survey.new(survey_params)
     if @survey.save
+      user = User.find(session[:user_id])
+      user.surveys << @survey
       redirect_to surveys_path
     else
       render :new
@@ -25,6 +26,7 @@ class SurveysController < ApplicationController
 
   def show
     @survey = Survey.find(params[:id])
+    @question = @survey.questions.order("created_at desc")
   end
 
   def update
@@ -40,6 +42,7 @@ class SurveysController < ApplicationController
   def destroy
     survey = Survey.find(params[:id])
     survey.destroy
+    survey.questions.destroy_all
     redirect_to surveys_path
   end
 
