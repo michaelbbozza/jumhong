@@ -1,0 +1,8 @@
+<h2><%= @user.username %></h2>
+<% @user.surveys.each do |sur| %>
+<%= sur.title %><br><br>
+<% end %>
+
+<%= button_to "Logout", logout_path, method: :delete, :class => :destroy %><br><br>
+
+<%= button_to "Delete Account", new_user_path, method: :delete, :class => :destroy %>
