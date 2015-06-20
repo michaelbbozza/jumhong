@@ -1,0 +1,6 @@
+<h2>List of choices:</h2>
+
+<% @choices.each do |choice|%>
+  <%= choice.content%>
+  <%=button_to 'Delete', choice_path(id: choice.id), method: :delete%><br>
+<%end%>
