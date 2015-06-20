@@ -18,6 +18,7 @@ class SurveysController < ApplicationController
   end
 
   def edit
+    @survey = Survey.find(params[:id])
   end
 
   def show

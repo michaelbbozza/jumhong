@@ -884,3 +884,11 @@ Started GET "/assets/application.self-377610cd7c1509e934744c810e3b4cf672dfbcacac
 
 
 Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-20 16:21:25 -0400
+
+
+Started GET "/surveys/1/edit" for ::1 at 2015-06-20 16:24:21 -0400
+Processing by SurveysController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSurvey Load (0.2ms)[0m  [1mSELECT  "surveys".* FROM "surveys" WHERE "surveys"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  Rendered surveys/edit.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 40ms (Views: 25.5ms | ActiveRecord: 1.9ms)
