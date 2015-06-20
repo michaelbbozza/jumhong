@@ -4,11 +4,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(params[:session][:username])
+    user = User.find_by_username(params[:session][:username])
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
+      redirect_to surveys_path
+    else
+      redirect_to login_path
     end
-    redirect_to surveys_path
   end
 
   def destroy

@@ -1,8 +1,9 @@
 class SurveysController < ApplicationController
+  before_action :require_logged_in
 
   def index
     @surveys = Survey.all
-    @user = User.find(session[:user_id])
+    # @user = User.find(session[:user_id])
   end
 
   def create

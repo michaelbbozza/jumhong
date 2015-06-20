@@ -2,8 +2,7 @@
 
 <% @surveys.each do |survey| %>
   <ul>
-    <li> <%= link_to survey.title, survey %>
+    <li> <%= link_to survey.title, survey %><br>
       <%= survey.description %> </li>
   </ul>
 <% end %>
-  <%= button_to "User Profile", user_path, method: :get %>
