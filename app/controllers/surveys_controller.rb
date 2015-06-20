@@ -2,6 +2,7 @@ class SurveysController < ApplicationController
 
   def index
     @surveys = Survey.all
+    @user = User.find(session[:user_id])
   end
 
   def create
@@ -36,6 +37,7 @@ class SurveysController < ApplicationController
   end
 
   def destroy
+    @survey.find(params[:id]).destroy
   end
 
   private

@@ -2,7 +2,9 @@
 
 <% @surveys.each do |survey| %>
   <ul>
-    <li> <%= link_to survey.title, survey %> <br>
+    <li> <%= link_to survey.title, survey %>
+      if session[:user_id] == @user.id
+        <%= link_to "delete", survey_path(id:survey.id), method: :delete %>
       <%= survey.description %> </li>
   </ul>
 <% end %>
