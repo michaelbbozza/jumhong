@@ -1,0 +1,7 @@
+<%= @survey.title %>
+<br>
+<% @survey.questions.each do |question| %>
+  <ul>
+    <li> <%= question.content %> </li>
+  </ul>
+<% end %>

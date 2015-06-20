@@ -1,0 +1,7 @@
+<h4> CREATE A SURVEY </h4>
+
+<%= form_for @survey do |f| %>
+  Title: <%= f.text_field :title %>
+  Description: <%= f.text_field :description %>
+  <%= f.submit "SUBMIT" %>
+<% end %>
