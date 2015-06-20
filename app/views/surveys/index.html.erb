@@ -1,0 +1,9 @@
+<h4> AVAILABLE SURVEYS </h4>
+
+<% @surveys.each do |survey| %>
+  <ul>
+    <li> <%= link_to survey.title, survey %>
+        <%= link_to "delete", survey_path(id:survey.id), method: :delete %>
+      <%= survey.description %> </li>
+  </ul>
+<% end %>
