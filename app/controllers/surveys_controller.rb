@@ -2,7 +2,7 @@ class SurveysController < ApplicationController
 
   def index
     @surveys = Survey.all
-    # @user = User.find(session[:user_id])
+    @user = User.find(session[:user_id])
   end
 
   def create
@@ -27,9 +27,9 @@ class SurveysController < ApplicationController
   end
 
   def update
-    @survey = Survey.find(params[:id])
-    @survey.assign_attributes(survey_params)
-    if @survey.save
+    survey = Survey.find(params[:id])
+    survey.assign_attributes(survey_params)
+    if survey.save
       redirect_to surveys_path
     else
       render :edit
@@ -37,7 +37,9 @@ class SurveysController < ApplicationController
   end
 
   def destroy
-    @survey.find(params[:id]).destroy
+    survey = Survey.find(params[:id])
+    survey.destroy
+    redirect_to surveys_path
   end
 
   private
