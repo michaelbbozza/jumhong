@@ -1,0 +1,9 @@
+<h2>Log in to make or take a survey!</h2>
+
+<%= form_for(:session, url: login_path) do |f|%>
+  <label for="username">Username:</label>
+  <%=f.text_field :username%><br><br>
+  <label for="password">Password:</label>
+  <%=f.password_field :password%><br><br>
+  <%=f.submit "Log in"%>
+<%end%>
