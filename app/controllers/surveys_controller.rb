@@ -1,13 +1,15 @@
 class SurveysController < ApplicationController
+  before_action :require_logged_in
 
   def index
     @surveys = Survey.all
-    # @user = User.find(session[:user_id])
   end
 
   def create
     @survey = Survey.new(survey_params)
     if @survey.save
+      user = User.find(session[:user_id])
+      user.surveys << @survey
       redirect_to surveys_path
     else
       render :new
@@ -24,12 +26,13 @@ class SurveysController < ApplicationController
 
   def show
     @survey = Survey.find(params[:id])
+    @question = @survey.questions.order("created_at desc")
   end
 
   def update
-    @survey = Survey.find(params[:id])
-    @survey.assign_attributes(survey_params)
-    if @survey.save
+    survey = Survey.find(params[:id])
+    survey.assign_attributes(survey_params)
+    if survey.save
       redirect_to surveys_path
     else
       render :edit
@@ -37,7 +40,10 @@ class SurveysController < ApplicationController
   end
 
   def destroy
-    @survey.find(params[:id]).destroy
+    survey = Survey.find(params[:id])
+    survey.destroy
+    survey.questions.destroy_all
+    redirect_to surveys_path
   end
 
   private

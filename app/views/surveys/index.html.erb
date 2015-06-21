@@ -1,9 +1,11 @@
 <h4> AVAILABLE SURVEYS </h4>
+<%=button_to 'Log Out', logout_path, method: :delete%>
+<%=button_to 'Create a survey', new_survey_path, method: :get %>
+<%=button_to 'User Profile', user_path(id: session[:user_id]), method: :get%>
 
 <% @surveys.each do |survey| %>
   <ul>
-    <li> <%= link_to survey.title, survey %>
-        <%= link_to "delete", survey_path(id:survey.id), method: :delete %>
+    <li> <%= link_to survey.title, survey %><br>
       <%= survey.description %> </li>
   </ul>
 <% end %>

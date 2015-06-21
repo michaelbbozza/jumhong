@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+    include ApplicationHelper
   helper_method :require_logged_in
   # before_action :require_logged_in
   # Prevent CSRF attacks by raising an exception.

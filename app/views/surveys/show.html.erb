@@ -1,7 +1,12 @@
 <%= @survey.title %>
 <br>
-<% @survey.questions.each do |question| %>
+<% @question.each do |question| %>
   <ul>
-    <li> <%= question.content %> </li>
+    <li> <%= question.content %>
+      <%=button_to 'Edit Question', edit_question_path(id: question.id), method: :get %>
+    </li>
   </ul>
 <% end %>
+
+
+

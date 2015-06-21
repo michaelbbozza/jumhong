@@ -2,6 +2,6 @@
 
 <%= form_for @question do |f| %>
   Title: <%= f.text_field :content %>
-  <%= f.hidden_field :survey_id, value: @survey.id %>
+
   <%= f.submit "ADD QUESTION" %>
 <% end %>
