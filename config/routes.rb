@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get '/questions/questionform' => 'questions#questionform'
+
   resources :surveys do
     resources :completedsurveys, only:[:index,:new,:create,:show]  
   end

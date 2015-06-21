@@ -11,13 +11,14 @@ class SurveysController < ApplicationController
       user = User.find(session[:user_id])
       user.surveys << @survey
       redirect_to surveys_path
-    else
+    elses
       render :new
     end
   end
 
   def new
     @survey = Survey.new
+    @questions = Question.all
   end
 
   def edit

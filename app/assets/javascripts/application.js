@@ -13,3 +13,33 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$(document).ready(function() {
+  $("#add-question").on('click',function(event){
+    event.preventDefault();
+    $.ajax("http://localhost:3000/questions/questionform")
+      .done(function(questionform) {
+        $("body").append(questionform);
+        $("form").on('submit',function(e) {
+          e.preventDefault();
+
+          $.ajax("http://localhost:3000/questions", {
+  	      	method: "POST",
+  	      	data: $("form").serialize()
+  	      })
+  	      .done(function(questionPartial) {
+  	      	$("ul").append(questionPartial);
+  	      	console.log(questionPartial)
+  	      })
+  	      .fail(function(){
+  	      	console.log('fail panda');
+  	      });
+  	     });
+  	    })
+  	    .fail(function() {
+  	      console.log('bad panda');
+  	    });
+  	});
+});
+
+

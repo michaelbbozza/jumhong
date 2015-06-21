@@ -1,16 +1,24 @@
 class QuestionsController < ApplicationController
 
+  def index
+    @questions = Question.all
+  end
+
   def create
     @question = Question.new(question_params)
     if @question.save
       survey = Survey.find_by(creator_id: session[:user_id])
       survey.questions << @question
-      redirect_to new_question_path
+      request.xhr? ? render(partial: 'question', object: @question) : redirect_to(@question)
     else
-      render :new
+      request.xhr? ? render(status: 422) : render('new')
     end
   end
 
+  def questionform
+    render partial: 'questions/form', locals: {question: Question.new}
+  end
+  
   def new
     @question = Question.new
   end
