@@ -1,9 +1,18 @@
+<%=button_to 'Back to Main Page', surveys_path, method: :get%>
+
+
 <h2><%= @user.username %></h2>
+
 <% @user.surveys.each do |sur| %>
-<%= sur.title %><br>
-<% if sur.creator_id == session[:user_id] %>
-  <%= button_to "delete", survey_path(id: sur.id), method: :delete %>
-  <%= button_to "edit", edit_survey_path(id: sur.id), method: :get%><br><br>
+  <%= sur.title %><br>
+  <% sur.completedsurveys.each do |csurvey|%>
+    <% if csurvey.taker_id == session[:user_id]%>
+      <%=button_to 'Completed Survey',  survey_completedsurveys_path(survey_id: sur.id), method: :get%>
+    <%end%>
+  <%end%>
+  <% if sur.creator_id == session[:user_id] %>
+  <%= button_to "edit", edit_survey_path(id: sur.id), method: :get%>
+  <%= button_to "delete", survey_path(id: sur.id), method: :delete %><br><br>
   <% end %>
 <% end %>
 

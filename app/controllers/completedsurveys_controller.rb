@@ -2,6 +2,7 @@ class CompletedsurveysController < ApplicationController
 
   def index
     @completedsurveys = Completedsurvey.all
+    @user = User.find(session[:user_id])
   end
 
   def new
