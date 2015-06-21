@@ -1,7 +1,18 @@
-<h4> CREATE A SURVEY </h4>
+<%=button_to 'Back to Main Page', surveys_path, method: :get%>
 
+<h4> CREATE A SURVEY </h4>
 <%= form_for @survey do |f| %>
   Title: <%= f.text_field :title %>
   Description: <%= f.text_field :description %>
   <%= f.submit "SUBMIT" %>
-<% end %>
+<% end %><br>
+
+<ul>
+
+<%@questions.each do |question|%>
+    <%= render 'questions/question', question: question%>
+<%end%>
+
+</ul>
+
+<%=button_to 'Add a question',new_question_path, id: 'add-question',method: :get%><br>

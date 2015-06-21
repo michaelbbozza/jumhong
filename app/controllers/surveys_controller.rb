@@ -11,22 +11,26 @@ class SurveysController < ApplicationController
       user = User.find(session[:user_id])
       user.surveys << @survey
       redirect_to surveys_path
-    else
+    elses
       render :new
     end
   end
 
   def new
     @survey = Survey.new
+    @questions = Question.all
   end
 
   def edit
     @survey = Survey.find(params[:id])
+    @questions = @survey.questions.order("created_at desc")
+    @choices = Choice.all
   end
 
   def show
     @survey = Survey.find(params[:id])
-    @question = @survey.questions.order("created_at desc")
+    @questions = @survey.questions.order("created_at desc")
+    @choices = Choice.all
   end
 
   def update

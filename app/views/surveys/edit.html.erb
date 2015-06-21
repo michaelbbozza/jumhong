@@ -1,8 +1,26 @@
-<h4> EDIT THE TITLE AND DESCRIPTION OF YOUR SURVEY </h4>
+<%=button_to 'Back to Main Page', surveys_path, method: :get%>
 
+<h4> EDIT THE TITLE AND DESCRIPTION OF YOUR SURVEY </h4>
 
 <%= form_for @survey do |f| %>
   Title: <%= f.text_field :title %>
   Description: <%= f.text_field :description %>
   <%= f.submit "UPDATE" %>
+<% end %>
+
+<h4> EDIT QUESTIONS AND CHOICES</h4>
+
+<% @questions.each do |question| %>
+  <ul>
+    <li> 
+    <%= question.content %>
+    <%=button_to 'Edit Question', edit_question_path(id: question.id), method: :get %><br>
+    </li> 
+  <%@choices.each do |choice|%>
+    <%if choice.question_id == question.id%>
+      <%=choice.content%><br>
+      <%=button_to 'Edit Choice', edit_choice_path(id: choice.id), method: :get %><br>
+    <%end%>
+  <%end%>
+  </ul>
 <% end %>
