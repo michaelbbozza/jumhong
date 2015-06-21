@@ -47377,3 +47377,61 @@ Processing by SessionsController#new as HTML
   Rendered sessions/_form.html.erb (0.9ms)
   Rendered sessions/new.html.erb within layouts/application (1.5ms)
 Completed 200 OK in 21ms (Views: 21.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2015-06-21 18:05:15 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by IndexController#index as HTML
+  Rendered index/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 311ms (Views: 310.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-21 18:05:15 -0400
+
+
+Started GET "/sessions/loginform" for ::1 at 2015-06-21 18:05:23 -0400
+Processing by SessionsController#new as */*
+  Rendered sessions/_form.html.erb (48.3ms)
+  Rendered sessions/new.html.erb within layouts/application (54.1ms)
+Completed 200 OK in 71ms (Views: 70.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1&_=1434924316074" for ::1 at 2015-06-21 18:05:23 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1&_=1434924316075" for ::1 at 2015-06-21 18:05:23 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1&_=1434924316076" for ::1 at 2015-06-21 18:05:23 -0400
+
+
+Started GET "/sessions/signupform" for ::1 at 2015-06-21 18:05:24 -0400
+Processing by SessionsController#signup as */*
+  Rendered sessions/_signup.html.erb (15.0ms)
+  Rendered sessions/signup.html.erb within layouts/application (18.3ms)
+Completed 200 OK in 126ms (Views: 38.7ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/sessions/signupform" for ::1 at 2015-06-21 18:05:24 -0400
+Processing by SessionsController#signup as */*
+  Rendered sessions/_signup.html.erb (1.1ms)
+  Rendered sessions/signup.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 24ms (Views: 23.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1&_=1434924323187" for ::1 at 2015-06-21 18:05:24 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1&_=1434924323188" for ::1 at 2015-06-21 18:05:24 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1&_=1434924323189" for ::1 at 2015-06-21 18:05:24 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1&_=1434924324400" for ::1 at 2015-06-21 18:05:24 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1&_=1434924324401" for ::1 at 2015-06-21 18:05:24 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1&_=1434924324402" for ::1 at 2015-06-21 18:05:24 -0400
