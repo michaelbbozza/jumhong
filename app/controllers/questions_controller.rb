@@ -24,7 +24,7 @@ class QuestionsController < ApplicationController
     survey = Survey.find_by(creator_id: session[:user_id])
     @question.update(question_params)
     # if @question.save
-      redirect_to survey_path
+    redirect_to edit_survey_path
     # else
     #   render :edit
     # end

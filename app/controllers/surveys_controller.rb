@@ -22,11 +22,14 @@ class SurveysController < ApplicationController
 
   def edit
     @survey = Survey.find(params[:id])
+    @questions = @survey.questions.order("created_at desc")
+    @choices = Choice.all
   end
 
   def show
     @survey = Survey.find(params[:id])
-    @question = @survey.questions.order("created_at desc")
+    @questions = @survey.questions.order("created_at desc")
+    @choices = Choice.all
   end
 
   def update

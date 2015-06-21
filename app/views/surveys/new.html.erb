@@ -4,4 +4,7 @@
   Title: <%= f.text_field :title %>
   Description: <%= f.text_field :description %>
   <%= f.submit "SUBMIT" %>
-<% end %>
+<% end %><br>
+
+<%=button_to 'Add a question',new_question_path, method: :get%><br>
+<%=button_to 'Add a choice', new_choice_path, method: :get%>

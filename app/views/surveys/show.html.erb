@@ -1,10 +1,16 @@
-<%= @survey.title %>
-<br>
-<% @question.each do |question| %>
+<h2><%= @survey.title %></h2><br>
+
+
+<% @questions.each do |question| %>
   <ul>
-    <li> <%= question.content %>
-      <%=button_to 'Edit Question', edit_question_path(id: question.id), method: :get %>
-    </li>
+    <li> 
+    <%= question.content %>
+    </li> 
+  <%@choices.each do |choice|%>
+    <%if choice.question_id == question.id%>
+      <%=choice.content%><br>
+    <%end%>
+  <%end%>
   </ul>
 <% end %>
 

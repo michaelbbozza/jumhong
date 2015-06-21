@@ -27,7 +27,7 @@ class ChoicesController < ApplicationController
     @choice = Choice.find(params[:id])
     @choice.assign_attributes(choice_params)
     if @choice.save
-      redirect_to choices_path
+      redirect_to edit_survey_path(id: @choice.question.survey_id)
     else
       redirect_to edit_choice_path
     end
