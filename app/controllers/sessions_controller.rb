@@ -3,6 +3,19 @@ class SessionsController < ApplicationController
   def new
   end
 
+  def loginform
+    render partial: "sessions/form"
+  end
+
+  def signup
+    @new_user = User.new
+  end
+
+  def signupform
+    render partial: "sessions/signup"
+  end
+
+
   def create
     user = User.find_by_username(params[:session][:username])
     if user && user.authenticate(params[:session][:password])

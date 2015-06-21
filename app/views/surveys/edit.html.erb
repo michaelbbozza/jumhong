@@ -1,4 +1,4 @@
-<%=button_to 'Back to Main Page', surveys_path, method: :get%>
+<%=button_to 'Back to Survey Page', surveys_path, method: :get%>
 
 <h4> EDIT THE TITLE AND DESCRIPTION OF YOUR SURVEY </h4>
 
@@ -12,10 +12,10 @@
 
 <% @questions.each do |question| %>
   <ul>
-    <li> 
+    <li>
     <%= question.content %>
     <%=button_to 'Edit Question', edit_question_path(id: question.id), method: :get %><br>
-    </li> 
+    </li>
   <%@choices.each do |choice|%>
     <%if choice.question_id == question.id%>
       <%=choice.content%><br>
@@ -24,3 +24,4 @@
   <%end%>
   </ul>
 <% end %>
+

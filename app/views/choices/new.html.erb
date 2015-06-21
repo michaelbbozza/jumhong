@@ -1,3 +1,5 @@
+<%=button_to 'Back to All Surveys', surveys_path, method: :get%>
+
 <h2>Make a new choice</h2>
 
 <%=form_for @choice do |f|%>
@@ -6,4 +8,5 @@
   <label for="question_id">Question Id:</label>
   <%=f.text_field :question_id%>
   <%=f.submit "Add Choice"%>
-<%end%>
+<%end %>
+<br>
