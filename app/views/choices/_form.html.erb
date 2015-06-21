@@ -1,0 +1,11 @@
+<div id= "add-choice-form">
+  <h4> ADD A CHOICE </h4>
+
+  <%= form_for choice do |f| %>
+
+  Content: <%= f.text_field :content %>
+  Question Id: <%=f.text_field :question_id%>
+
+  <%= f.submit "ADD CHOICE" %>
+  <% end %>
+</div>

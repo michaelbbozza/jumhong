@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
 
   get '/questions/questionform' => 'questions#questionform'
-
+  get '/choices/choiceform' => 'choices#choiceform'
+  get '/sessions/loginform' => 'sessions#new'
+  get '/sessions/signupform' => 'sessions#signup'
   resources :surveys do
-    resources :completedsurveys, only:[:index,:new,:create,:show]  
+    resources :completedsurveys, only:[:index,:new,:create,:show]
   end
   resources :questions
   resources :choices

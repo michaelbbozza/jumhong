@@ -9,14 +9,23 @@ class ChoicesController < ApplicationController
   end
 
   def create
-    @choice = Choice.create(choice_params)
-    user = User.find(session[:user_id])   
+    @choice = Choice.new(choice_params)
+    if @choice.save
+    user = User.find(session[:user_id])
     user.choices << @choice
-    redirect_to new_choice_path
+    question = Question.find_by(id: params[:question_id])
+    request.xhr? ? render(partial: 'choice', object: @choice) : redirect_to(@choice)
+    else
+    request.xhr? ? render(status: 422) : render('new')
+    end
+  end
+
+  def choiceform
+    render partial: 'choices/form', locals: {choice: Choice.new}
   end
 
   def show
-    @choice = Choice.find(params[:id])  
+    @choice = Choice.find(params[:id])
   end
 
   def edit
@@ -36,7 +45,7 @@ class ChoicesController < ApplicationController
   def destroy
     @choice = Choice.find(params[:id])
     @choice.destroy
-    redirect_to surveys_path
+    redirect_to new_survey_path
   end
 
   private

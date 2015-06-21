@@ -18,30 +18,31 @@ class QuestionsController < ApplicationController
   def questionform
     render partial: 'questions/form', locals: {question: Question.new}
   end
-  
+
   def new
     @question = Question.new
   end
 
+  def show
+    @question = Question.find(params[:id])
+  end
+
   def edit
     @question = Question.find(params[:id])
+    @survey = @question.survey_id
   end
 
   def update
     @question = Question.find(params[:id])
-    survey = Survey.find_by(creator_id: session[:user_id])
+    @survey = @question.survey_id
     @question.update(question_params)
-    # if @question.save
-    redirect_to edit_survey_path
-    # else
-    #   render :edit
-    # end
+    redirect_to edit_survey_path(@survey)
   end
 
   def destroy
     @question = Question.find(params[:id])
     @question.destroy
-    redirect_to survey_path
+    redirect_to new_survey_path
   end
 
   private

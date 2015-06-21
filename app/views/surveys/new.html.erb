@@ -9,10 +9,18 @@
 
 <ul>
 
-<%@questions.each do |question|%>
-    <%= render 'questions/question', question: question%>
+<% @questions.each do |question|%>
+    <%= render 'questions/question', question: question%><br>
+  <% @choices.each do |choice|%>
+    <%if question.id == choice.question_id%>
+    <ol class="mothafucka">
+      <%= render 'choices/choice', choice: choice%><br><br>
+    </ol>
+    <%end%>
+  <%end%>
 <%end%>
 
 </ul>
 
 <%=button_to 'Add a question',new_question_path, id: 'add-question',method: :get%><br>
+<%=button_to 'Add a choice', new_survey_path, id: 'add-choice', method: :get%><br>

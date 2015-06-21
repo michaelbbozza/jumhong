@@ -11,7 +11,7 @@ class SurveysController < ApplicationController
       user = User.find(session[:user_id])
       user.surveys << @survey
       redirect_to surveys_path
-    elses
+    else
       render :new
     end
   end
@@ -19,6 +19,8 @@ class SurveysController < ApplicationController
   def new
     @survey = Survey.new
     @questions = Question.all
+    @choices = Choice.all
+    # @question = Question.new
   end
 
   def edit
