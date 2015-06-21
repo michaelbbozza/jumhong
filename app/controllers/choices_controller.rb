@@ -12,11 +12,11 @@ class ChoicesController < ApplicationController
     @choice = Choice.create(choice_params)
     user = User.find(session[:user_id])   
     user.choices << @choice
-    redirect_to surveys_path
+    redirect_to new_choice_path
   end
 
   def show
-    @choice = Choice.find(params[:user_id])
+    @choice = Choice.find(params[:id])  
   end
 
   def edit
@@ -27,7 +27,7 @@ class ChoicesController < ApplicationController
     @choice = Choice.find(params[:id])
     @choice.assign_attributes(choice_params)
     if @choice.save
-      redirect_to surveys_path
+      redirect_to choices_path
     else
       redirect_to edit_choice_path
     end
