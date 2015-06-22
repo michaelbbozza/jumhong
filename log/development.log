@@ -48837,3 +48837,117 @@ Started GET "/" for ::1 at 2015-06-22 08:39:27 -0400
 Processing by IndexController#index as HTML
   Rendered index/index.html.erb within layouts/application (0.4ms)
 Completed 200 OK in 19ms (Views: 18.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sessions/loginform" for ::1 at 2015-06-22 08:40:05 -0400
+Processing by SessionsController#new as */*
+  Rendered sessions/_form.html.erb (0.9ms)
+  Rendered sessions/new.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 21ms (Views: 20.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1&_=1434976767992" for ::1 at 2015-06-22 08:40:05 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1&_=1434976767993" for ::1 at 2015-06-22 08:40:05 -0400
+
+
+Started GET "/assets/application.self-4c98417661d28aebc5f4e51672f3ee3b42e9afb34d9622fa211acf8d840a9be6.js?body=1&_=1434976767994" for ::1 at 2015-06-22 08:40:05 -0400
+
+
+Started POST "/login" for ::1 at 2015-06-22 08:40:11 -0400
+Processing by SessionsController#create as */*
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"+RchkePkyMNco3tJNvIm5AcYHxS02iNqZGsFCizCk6jLVl/D1tZanbQInGmec/gXoyExwj1ZBiBQWNU3YlRQkg==", "session"=>{"username"=>"mike", "password"=>"[FILTERED]"}}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT 1  [["username", "mike"]]
+Redirected to http://localhost:3000/surveys
+Completed 302 Found in 78ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/surveys" for ::1 at 2015-06-22 08:40:11 -0400
+Processing by SurveysController#index as */*
+  [1m[36mSurvey Load (0.3ms)[0m  [1mSELECT "surveys".* FROM "surveys"[0m
+  Rendered surveys/index.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 21ms (Views: 19.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1&_=1434976805299" for ::1 at 2015-06-22 08:40:11 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1&_=1434976805300" for ::1 at 2015-06-22 08:40:11 -0400
+
+
+Started GET "/assets/application.self-4c98417661d28aebc5f4e51672f3ee3b42e9afb34d9622fa211acf8d840a9be6.js?body=1&_=1434976805301" for ::1 at 2015-06-22 08:40:11 -0400
+
+
+Started GET "/surveys" for ::1 at 2015-06-22 08:40:11 -0400
+Processing by SurveysController#index as HTML
+  [1m[35mSurvey Load (0.5ms)[0m  SELECT "surveys".* FROM "surveys"
+  Rendered surveys/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 21ms (Views: 19.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/users/1" for ::1 at 2015-06-22 08:40:27 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mSurvey Load (0.2ms)[0m  SELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1  [["creator_id", 1]]
+  [1m[36mCompletedsurvey Load (0.3ms)[0m  [1mSELECT "completedsurveys".* FROM "completedsurveys" WHERE "completedsurveys"."survey_id" = $1[0m  [["survey_id", 1]]
+  Rendered users/show.html.erb within layouts/application (81.0ms)
+Completed 200 OK in 99ms (Views: 94.9ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/users/1" for ::1 at 2015-06-22 08:40:45 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mSurvey Load (0.3ms)[0m  [1mSELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1[0m  [["creator_id", 1]]
+  [1m[35mCompletedsurvey Load (0.1ms)[0m  SELECT "completedsurveys".* FROM "completedsurveys" WHERE "completedsurveys"."survey_id" = $1  [["survey_id", 1]]
+  Rendered users/show.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 25ms (Views: 22.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/surveys/1/edit" for ::1 at 2015-06-22 08:40:46 -0400
+Processing by SurveysController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSurvey Load (0.2ms)[0m  [1mSELECT  "surveys".* FROM "surveys" WHERE "surveys"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mQuestion Load (0.2ms)[0m  SELECT "questions".* FROM "questions" WHERE "questions"."survey_id" = $1  ORDER BY created_at desc  [["survey_id", 1]]
+  [1m[36mChoice Load (0.3ms)[0m  [1mSELECT "choices".* FROM "choices"[0m
+  Rendered surveys/edit.html.erb within layouts/application (15.4ms)
+Completed 200 OK in 42ms (Views: 26.2ms | ActiveRecord: 3.8ms)
+
+
+Started GET "/surveys" for ::1 at 2015-06-22 08:40:59 -0400
+Processing by SurveysController#index as HTML
+  [1m[35mSurvey Load (0.4ms)[0m  SELECT "surveys".* FROM "surveys"
+  Rendered surveys/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 19ms (Views: 17.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/surveys/new" for ::1 at 2015-06-22 08:41:01 -0400
+Processing by SurveysController#new as HTML
+  [1m[36mQuestion Load (0.4ms)[0m  [1mSELECT "questions".* FROM "questions"[0m
+  Rendered questions/_question.html.erb (0.2ms)
+  [1m[35mChoice Load (0.3ms)[0m  SELECT "choices".* FROM "choices"
+  Rendered choices/_choice.html.erb (0.1ms)
+  Rendered surveys/new.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 20ms (Views: 18.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/surveys" for ::1 at 2015-06-22 08:41:03 -0400
+Processing by SurveysController#index as HTML
+  [1m[36mSurvey Load (0.4ms)[0m  [1mSELECT "surveys".* FROM "surveys"[0m
+  Rendered surveys/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 20ms (Views: 18.5ms | ActiveRecord: 0.4ms)
+
+
+Started DELETE "/logout" for ::1 at 2015-06-22 08:41:05 -0400
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"kaB078NciWbXc0l+hbsQnx5j2wVBdkdO4A7yl1Pdhlaj4Qq99m4bOD/Yrl4tOs5sulr108j1YgTUPSKqHUtFbA=="}
+Redirected to http://localhost:3000/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2015-06-22 08:41:05 -0400
+Processing by IndexController#index as HTML
+  Rendered index/index.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 17ms (Views: 16.6ms | ActiveRecord: 0.0ms)
