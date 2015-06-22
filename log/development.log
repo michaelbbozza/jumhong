@@ -47435,3 +47435,1405 @@ Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd81
 
 
 Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1&_=1434924324402" for ::1 at 2015-06-21 18:05:24 -0400
+  [1m[36m (19.2ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (1.4ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateUsers (20150619212348)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (34.4ms)[0m  [1mCREATE TABLE "users" ("id" serial primary key, "username" character varying NOT NULL, "password_digest" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150619212348"]]
+  [1m[36m (15.7ms)[0m  [1mCOMMIT[0m
+Migrating to CreateSurveys (20150619212505)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (3.6ms)[0m  [1mCREATE TABLE "surveys" ("id" serial primary key, "title" character varying NOT NULL, "description" text NOT NULL, "creator_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150619212505"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Migrating to CreateQuestions (20150619212522)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (4.1ms)[0m  [1mCREATE TABLE "questions" ("id" serial primary key, "survey_id" integer, "content" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150619212522"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateChoices (20150619212536)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.6ms)[0m  [1mCREATE TABLE "choices" ("id" serial primary key, "question_id" integer NOT NULL, "content" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150619212536"]]
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreateSelections (20150619212556)
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (2.6ms)[0m  [1mCREATE TABLE "selections" ("id" serial primary key, "taker_id" integer, "choice_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150619212556"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCompletedsurveys (20150619212657)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (2.1ms)[0m  [1mCREATE TABLE "completedsurveys" ("id" serial primary key, "taker_id" integer, "survey_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150619212657"]]
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (2.2ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'choices'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.1ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'completedsurveys'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.8ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'questions'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.6ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'selections'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (1.6ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'surveys'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.6ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.8ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."username" = 'mike' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("username", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["username", "mike"], ["password_digest", "$2a$10$cdVs0GoUh14iekhOtArETeEbdLEZdbnyTcuQDfN/lF6XfEEFj/Bu."], ["created_at", "2015-06-22 12:18:46.176605"], ["updated_at", "2015-06-22 12:18:46.176605"]]
+  [1m[36m (15.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSurvey Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "surveys" WHERE "surveys"."title" = 'Test' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "surveys" ("title", "description", "creator_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["title", "Test"], ["description", "testing"], ["creator_id", 1], ["created_at", "2015-06-22 12:18:46.211711"], ["updated_at", "2015-06-22 12:18:46.211711"]]
+  [1m[36m (15.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "questions" ("survey_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["survey_id", 1], ["content", "Do you like Big L?"], ["created_at", "2015-06-22 12:18:46.241287"], ["updated_at", "2015-06-22 12:18:46.241287"]]
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "choices" ("question_id", "content", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["question_id", 1], ["content", "Yes"], ["created_at", "2015-06-22 12:18:46.287055"], ["updated_at", "2015-06-22 12:18:46.287055"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."username" = 'Julia' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("username", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["username", "Julia"], ["password_digest", "$2a$10$GmVA1dUQNQPavBsvp//ox.PxeJvKUXzIjoK7MGODyFuDGb48kXeAa"], ["created_at", "2015-06-22 12:18:46.367704"], ["updated_at", "2015-06-22 12:18:46.367704"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "selections" ("taker_id", "choice_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["taker_id", 2], ["choice_id", 1], ["created_at", "2015-06-22 12:18:46.379444"], ["updated_at", "2015-06-22 12:18:46.379444"]]
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "completedsurveys" ("taker_id", "survey_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["taker_id", 2], ["survey_id", 1], ["created_at", "2015-06-22 12:18:46.390169"], ["updated_at", "2015-06-22 12:18:46.390169"]]
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+
+
+Started GET "/" for ::1 at 2015-06-22 08:19:00 -0400
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by IndexController#index as HTML
+  Rendered index/index.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 401ms (Views: 400.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2015-06-22 08:19:00 -0400
+Processing by IndexController#index as HTML
+  Rendered index/index.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 17ms (Views: 16.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:19:00 -0400
+
+
+Started GET "/" for ::1 at 2015-06-22 08:21:09 -0400
+Processing by IndexController#index as HTML
+  Rendered index/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 116ms (Views: 116.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:21:09 -0400
+
+
+Started GET "/assets/application.self-95c7bb89a72f3421cc1d65e37191a876b3989e36e80ee692d98cfca88a52355f.css?body=1" for ::1 at 2015-06-22 08:21:09 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:21:09 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:21:09 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:21:09 -0400
+
+
+Started GET "/" for ::1 at 2015-06-22 08:21:48 -0400
+Processing by IndexController#index as HTML
+  Rendered index/index.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 87ms (Views: 87.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:21:48 -0400
+
+
+Started GET "/assets/application.self-3c2465c0b439eeb56eb3cf3f7af5a83ad741f0584eb14a0159d0a35d96bb5067.css?body=1" for ::1 at 2015-06-22 08:21:48 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:21:48 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:21:48 -0400
+
+
+Started GET "/" for ::1 at 2015-06-22 08:21:50 -0400
+Processing by IndexController#index as HTML
+  Rendered index/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 17ms (Views: 16.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:21:50 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:21:50 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:21:50 -0400
+
+
+Started GET "/assets/application.self-3c2465c0b439eeb56eb3cf3f7af5a83ad741f0584eb14a0159d0a35d96bb5067.css?body=1" for ::1 at 2015-06-22 08:21:50 -0400
+
+
+Started GET "/" for ::1 at 2015-06-22 08:22:01 -0400
+Processing by IndexController#index as HTML
+  Rendered index/index.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 26ms (Views: 25.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-95c7bb89a72f3421cc1d65e37191a876b3989e36e80ee692d98cfca88a52355f.css?body=1" for ::1 at 2015-06-22 08:22:01 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:22:01 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:22:01 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:22:01 -0400
+
+
+Started GET "/" for ::1 at 2015-06-22 08:22:17 -0400
+Processing by IndexController#index as HTML
+  Rendered index/index.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 99ms (Views: 98.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-ede18212ffacce56bb2ce64d43d8f8e9ab49e81f01741e3e34e3cc77092d4935.css?body=1" for ::1 at 2015-06-22 08:22:17 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:22:17 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:22:17 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:22:17 -0400
+
+
+Started GET "/users" for ::1 at 2015-06-22 08:23:15 -0400
+
+ActionController::RoutingError (No route matches [GET] "/users"):
+  actionpack (4.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  web-console (2.1.3) lib/web_console/middleware.rb:37:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.1) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.1) lib/rails/engine.rb:518:in `call'
+  railties (4.2.1) lib/rails/application.rb:164:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.4) lib/rack/handler/webrick.rb:88:in `service'
+  /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/2.0.0/webrick/httpserver.rb:138:in `service'
+  /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/2.0.0/webrick/httpserver.rb:94:in `run'
+  /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/2.0.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/routes/_route.html.erb (2.5ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/routes/_table.html.erb (88.3ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.2ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/actionpack-4.2.1/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (134.6ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.3/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.3/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.3/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.3/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.3/lib/web_console/templates/console.js.erb within layouts/javascript (28.8ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.3/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.3/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/apprentice/.rbenv/versions/2.0.0-p353/lib/ruby/gems/2.0.0/gems/web-console-2.1.3/lib/web_console/templates/index.html.erb (70.0ms)
+
+
+Started GET "/sessions/loginform" for ::1 at 2015-06-22 08:23:34 -0400
+Processing by SessionsController#new as */*
+  Rendered sessions/_form.html.erb (3.4ms)
+  Rendered sessions/new.html.erb within layouts/application (8.0ms)
+Completed 200 OK in 102ms (Views: 101.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-e8776f50c349202df5e97a16edb08bdd58bedb2f6bdce6cf0b60ff5c6565f6d7.css?body=1" for ::1 at 2015-06-22 08:23:34 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1&_=1434975737411" for ::1 at 2015-06-22 08:23:34 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1&_=1434975737412" for ::1 at 2015-06-22 08:23:34 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1&_=1434975737413" for ::1 at 2015-06-22 08:23:34 -0400
+
+
+Started POST "/login" for ::1 at 2015-06-22 08:23:40 -0400
+Processing by SessionsController#create as */*
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"TQ2WYUfsnzH+3XtLa12qMbge8QLf8AtiEV2mzVA+l0t/TOgzct4NbxZ2nGvD3HTCHCff1FZzLiglbnbwHqhUcQ==", "session"=>{"username"=>"mike", "password"=>"[FILTERED]"}}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT 1  [["username", "mike"]]
+Redirected to http://localhost:3000/surveys
+Completed 302 Found in 108ms (ActiveRecord: 3.5ms)
+
+
+Started GET "/surveys" for ::1 at 2015-06-22 08:23:40 -0400
+Processing by SurveysController#index as */*
+  [1m[36mSurvey Load (0.8ms)[0m  [1mSELECT "surveys".* FROM "surveys"[0m
+  Rendered surveys/index.html.erb within layouts/application (11.5ms)
+Completed 200 OK in 39ms (Views: 29.2ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1&_=1434975814756" for ::1 at 2015-06-22 08:23:41 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1&_=1434975814757" for ::1 at 2015-06-22 08:23:41 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1&_=1434975814758" for ::1 at 2015-06-22 08:23:41 -0400
+
+
+Started GET "/surveys" for ::1 at 2015-06-22 08:23:41 -0400
+Processing by SurveysController#index as HTML
+  [1m[35mSurvey Load (0.3ms)[0m  SELECT "surveys".* FROM "surveys"
+  Rendered surveys/index.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 87ms (Views: 85.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users/1" for ::1 at 2015-06-22 08:23:43 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mSurvey Load (0.2ms)[0m  SELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1  [["creator_id", 1]]
+  [1m[36mCompletedsurvey Load (0.3ms)[0m  [1mSELECT "completedsurveys".* FROM "completedsurveys" WHERE "completedsurveys"."survey_id" = $1[0m  [["survey_id", 1]]
+  Rendered users/show.html.erb within layouts/application (44.2ms)
+Completed 200 OK in 63ms (Views: 58.6ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/users/1" for ::1 at 2015-06-22 08:23:58 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mSurvey Load (0.3ms)[0m  [1mSELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1[0m  [["creator_id", 1]]
+  [1m[35mCompletedsurvey Load (0.3ms)[0m  SELECT "completedsurveys".* FROM "completedsurveys" WHERE "completedsurveys"."survey_id" = $1  [["survey_id", 1]]
+  Rendered users/show.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 21ms (Views: 18.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/application.self-e8776f50c349202df5e97a16edb08bdd58bedb2f6bdce6cf0b60ff5c6565f6d7.css?body=1" for ::1 at 2015-06-22 08:23:58 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:23:58 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:23:58 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:23:58 -0400
+
+
+Started GET "/users/1" for ::1 at 2015-06-22 08:24:13 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mSurvey Load (0.4ms)[0m  SELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1  [["creator_id", 1]]
+  [1m[36mCompletedsurvey Load (0.3ms)[0m  [1mSELECT "completedsurveys".* FROM "completedsurveys" WHERE "completedsurveys"."survey_id" = $1[0m  [["survey_id", 1]]
+  Rendered users/show.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 90ms (Views: 87.4ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/assets/application.self-e8776f50c349202df5e97a16edb08bdd58bedb2f6bdce6cf0b60ff5c6565f6d7.css?body=1" for ::1 at 2015-06-22 08:24:13 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:24:13 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:24:13 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:24:13 -0400
+
+
+Started GET "/users/1" for ::1 at 2015-06-22 08:25:10 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mSurvey Load (0.3ms)[0m  [1mSELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1[0m  [["creator_id", 1]]
+  [1m[35mCompletedsurvey Load (0.2ms)[0m  SELECT "completedsurveys".* FROM "completedsurveys" WHERE "completedsurveys"."survey_id" = $1  [["survey_id", 1]]
+  Rendered users/show.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 25ms (Views: 21.0ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/application.self-e8776f50c349202df5e97a16edb08bdd58bedb2f6bdce6cf0b60ff5c6565f6d7.css?body=1" for ::1 at 2015-06-22 08:25:10 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:25:10 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:25:10 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:25:10 -0400
+
+
+Started GET "/users/1" for ::1 at 2015-06-22 08:25:26 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mSurvey Load (0.5ms)[0m  SELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1  [["creator_id", 1]]
+  [1m[36mCompletedsurvey Load (0.4ms)[0m  [1mSELECT "completedsurveys".* FROM "completedsurveys" WHERE "completedsurveys"."survey_id" = $1[0m  [["survey_id", 1]]
+  Rendered users/show.html.erb within layouts/application (6.5ms)
+Completed 200 OK in 25ms (Views: 22.6ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/assets/application.self-e8776f50c349202df5e97a16edb08bdd58bedb2f6bdce6cf0b60ff5c6565f6d7.css?body=1" for ::1 at 2015-06-22 08:25:26 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:25:26 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:25:26 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:25:26 -0400
+
+
+Started GET "/users/1" for ::1 at 2015-06-22 08:25:33 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mSurvey Load (0.3ms)[0m  [1mSELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1[0m  [["creator_id", 1]]
+  [1m[35mCompletedsurvey Load (0.2ms)[0m  SELECT "completedsurveys".* FROM "completedsurveys" WHERE "completedsurveys"."survey_id" = $1  [["survey_id", 1]]
+  Rendered users/show.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 28ms (Views: 24.1ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/application.self-e8776f50c349202df5e97a16edb08bdd58bedb2f6bdce6cf0b60ff5c6565f6d7.css?body=1" for ::1 at 2015-06-22 08:25:33 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:25:33 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:25:33 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:25:33 -0400
+
+
+Started GET "/users/1" for ::1 at 2015-06-22 08:25:39 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mSurvey Load (0.2ms)[0m  SELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1  [["creator_id", 1]]
+  [1m[36mCompletedsurvey Load (0.2ms)[0m  [1mSELECT "completedsurveys".* FROM "completedsurveys" WHERE "completedsurveys"."survey_id" = $1[0m  [["survey_id", 1]]
+  Rendered users/show.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 30ms (Views: 25.4ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/application.self-e8776f50c349202df5e97a16edb08bdd58bedb2f6bdce6cf0b60ff5c6565f6d7.css?body=1" for ::1 at 2015-06-22 08:25:39 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:25:39 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:25:39 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:25:39 -0400
+
+
+Started GET "/users/1" for ::1 at 2015-06-22 08:25:47 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mSurvey Load (0.8ms)[0m  [1mSELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1[0m  [["creator_id", 1]]
+  [1m[35mCompletedsurvey Load (0.4ms)[0m  SELECT "completedsurveys".* FROM "completedsurveys" WHERE "completedsurveys"."survey_id" = $1  [["survey_id", 1]]
+  Rendered users/show.html.erb within layouts/application (8.5ms)
+Completed 200 OK in 92ms (Views: 89.1ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/assets/application.self-e8776f50c349202df5e97a16edb08bdd58bedb2f6bdce6cf0b60ff5c6565f6d7.css?body=1" for ::1 at 2015-06-22 08:25:47 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:25:47 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:25:47 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:25:47 -0400
+
+
+Started GET "/users/1" for ::1 at 2015-06-22 08:26:24 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mSurvey Load (0.2ms)[0m  SELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1  [["creator_id", 1]]
+  [1m[36mCompletedsurvey Load (0.2ms)[0m  [1mSELECT "completedsurveys".* FROM "completedsurveys" WHERE "completedsurveys"."survey_id" = $1[0m  [["survey_id", 1]]
+  Rendered users/show.html.erb within layouts/application (4.9ms)
+Completed 200 OK in 36ms (Views: 33.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/application.self-c7720789be0ac3c737595cafa4e486e8f19d64ca80578694a3b89ec7893e015c.css?body=1" for ::1 at 2015-06-22 08:26:24 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:26:24 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:26:24 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:26:24 -0400
+
+
+Started GET "/users/1" for ::1 at 2015-06-22 08:26:33 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mSurvey Load (0.2ms)[0m  [1mSELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1[0m  [["creator_id", 1]]
+  [1m[35mCompletedsurvey Load (0.2ms)[0m  SELECT "completedsurveys".* FROM "completedsurveys" WHERE "completedsurveys"."survey_id" = $1  [["survey_id", 1]]
+  Rendered users/show.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 89ms (Views: 86.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/application.self-c7720789be0ac3c737595cafa4e486e8f19d64ca80578694a3b89ec7893e015c.css?body=1" for ::1 at 2015-06-22 08:26:33 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:26:33 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:26:33 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:26:33 -0400
+
+
+Started GET "/users/1" for ::1 at 2015-06-22 08:26:39 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mSurvey Load (0.2ms)[0m  SELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1  [["creator_id", 1]]
+  [1m[36mCompletedsurvey Load (0.2ms)[0m  [1mSELECT "completedsurveys".* FROM "completedsurveys" WHERE "completedsurveys"."survey_id" = $1[0m  [["survey_id", 1]]
+  Rendered users/show.html.erb within layouts/application (5.2ms)
+Completed 200 OK in 24ms (Views: 22.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/application.self-c7720789be0ac3c737595cafa4e486e8f19d64ca80578694a3b89ec7893e015c.css?body=1" for ::1 at 2015-06-22 08:26:39 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:26:39 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:26:39 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:26:39 -0400
+
+
+Started GET "/users/1" for ::1 at 2015-06-22 08:26:47 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mSurvey Load (0.2ms)[0m  [1mSELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1[0m  [["creator_id", 1]]
+  [1m[35mCompletedsurvey Load (0.2ms)[0m  SELECT "completedsurveys".* FROM "completedsurveys" WHERE "completedsurveys"."survey_id" = $1  [["survey_id", 1]]
+  Rendered users/show.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 102ms (Views: 99.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/application.self-05ae4785fe73707901e5c3be24fc7cff48fe13a8a768e4f5e145a9c9b324a2f6.css?body=1" for ::1 at 2015-06-22 08:26:47 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:26:47 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:26:47 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:26:47 -0400
+
+
+Started GET "/users/1" for ::1 at 2015-06-22 08:26:55 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mSurvey Load (0.2ms)[0m  SELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1  [["creator_id", 1]]
+  [1m[36mCompletedsurvey Load (0.2ms)[0m  [1mSELECT "completedsurveys".* FROM "completedsurveys" WHERE "completedsurveys"."survey_id" = $1[0m  [["survey_id", 1]]
+  Rendered users/show.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 39ms (Views: 36.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:26:55 -0400
+
+
+Started GET "/assets/application.self-53e2d182438a09a0ea66d170aefcb92b9799a8ba36f945a735582bb760ac4fed.css?body=1" for ::1 at 2015-06-22 08:26:55 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:26:55 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:26:55 -0400
+
+
+Started GET "/users/1" for ::1 at 2015-06-22 08:27:05 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mSurvey Load (0.3ms)[0m  [1mSELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1[0m  [["creator_id", 1]]
+  [1m[35mCompletedsurvey Load (0.2ms)[0m  SELECT "completedsurveys".* FROM "completedsurveys" WHERE "completedsurveys"."survey_id" = $1  [["survey_id", 1]]
+  Rendered users/show.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 97ms (Views: 95.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/application.self-35e8e1c4d4df81397d5674bc230b2d58cae28f60cfa8aa5cacfa3bcab39d2a21.css?body=1" for ::1 at 2015-06-22 08:27:05 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:27:05 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:27:05 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:27:05 -0400
+
+
+Started GET "/users/1" for ::1 at 2015-06-22 08:27:12 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mSurvey Load (0.2ms)[0m  SELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1  [["creator_id", 1]]
+  [1m[36mCompletedsurvey Load (0.1ms)[0m  [1mSELECT "completedsurveys".* FROM "completedsurveys" WHERE "completedsurveys"."survey_id" = $1[0m  [["survey_id", 1]]
+  Rendered users/show.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 29ms (Views: 25.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/application.self-35e8e1c4d4df81397d5674bc230b2d58cae28f60cfa8aa5cacfa3bcab39d2a21.css?body=1" for ::1 at 2015-06-22 08:27:12 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:27:12 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:27:12 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:27:12 -0400
+
+
+Started GET "/users/1" for ::1 at 2015-06-22 08:27:32 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mSurvey Load (0.2ms)[0m  [1mSELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1[0m  [["creator_id", 1]]
+  [1m[35mCompletedsurvey Load (0.2ms)[0m  SELECT "completedsurveys".* FROM "completedsurveys" WHERE "completedsurveys"."survey_id" = $1  [["survey_id", 1]]
+  Rendered users/show.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 88ms (Views: 86.0ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/application.self-05ae4785fe73707901e5c3be24fc7cff48fe13a8a768e4f5e145a9c9b324a2f6.css?body=1" for ::1 at 2015-06-22 08:27:32 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:27:32 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:27:32 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:27:32 -0400
+
+
+Started GET "/surveys" for ::1 at 2015-06-22 08:27:44 -0400
+Processing by SurveysController#index as HTML
+  [1m[36mSurvey Load (0.3ms)[0m  [1mSELECT "surveys".* FROM "surveys"[0m
+  Rendered surveys/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 18ms (Views: 17.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/surveys" for ::1 at 2015-06-22 08:28:27 -0400
+Processing by SurveysController#index as HTML
+  [1m[35mSurvey Load (0.3ms)[0m  SELECT "surveys".* FROM "surveys"
+  Rendered surveys/index.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 21ms (Views: 20.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.self-05ae4785fe73707901e5c3be24fc7cff48fe13a8a768e4f5e145a9c9b324a2f6.css?body=1" for ::1 at 2015-06-22 08:28:27 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:28:27 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:28:27 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:28:27 -0400
+
+
+Started GET "/surveys" for ::1 at 2015-06-22 08:28:35 -0400
+Processing by SurveysController#index as HTML
+  [1m[36mSurvey Load (0.3ms)[0m  [1mSELECT "surveys".* FROM "surveys"[0m
+  Rendered surveys/index.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 21ms (Views: 20.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.self-05ae4785fe73707901e5c3be24fc7cff48fe13a8a768e4f5e145a9c9b324a2f6.css?body=1" for ::1 at 2015-06-22 08:28:35 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:28:35 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:28:35 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:28:35 -0400
+
+
+Started GET "/surveys" for ::1 at 2015-06-22 08:29:29 -0400
+Processing by SurveysController#index as HTML
+  [1m[35mSurvey Load (0.3ms)[0m  SELECT "surveys".* FROM "surveys"
+  Rendered surveys/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 96ms (Views: 95.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.self-39af98ba2d832f88c6e73126ca726c4c801e4d5bdfbabff504cd86bd2d50dbd6.css?body=1" for ::1 at 2015-06-22 08:29:29 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:29:29 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:29:29 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:29:29 -0400
+
+
+Started GET "/surveys" for ::1 at 2015-06-22 08:30:06 -0400
+Processing by SurveysController#index as HTML
+  [1m[36mSurvey Load (0.3ms)[0m  [1mSELECT "surveys".* FROM "surveys"[0m
+  Rendered surveys/index.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 99ms (Views: 98.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.self-dbd226e73c5c12e2a3dd56eb1dc899cea05aa62ea6b852f19cf6233fc86a3986.css?body=1" for ::1 at 2015-06-22 08:30:06 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:30:06 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:30:06 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:30:06 -0400
+
+
+Started GET "/surveys" for ::1 at 2015-06-22 08:30:45 -0400
+Processing by SurveysController#index as HTML
+  [1m[35mSurvey Load (0.3ms)[0m  SELECT "surveys".* FROM "surveys"
+  Rendered surveys/index.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 21ms (Views: 20.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.self-39af98ba2d832f88c6e73126ca726c4c801e4d5bdfbabff504cd86bd2d50dbd6.css?body=1" for ::1 at 2015-06-22 08:30:45 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:30:45 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:30:45 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:30:45 -0400
+
+
+Started GET "/surveys" for ::1 at 2015-06-22 08:31:00 -0400
+Processing by SurveysController#index as HTML
+  [1m[36mSurvey Load (0.3ms)[0m  [1mSELECT "surveys".* FROM "surveys"[0m
+  Rendered surveys/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 19ms (Views: 17.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.self-39af98ba2d832f88c6e73126ca726c4c801e4d5bdfbabff504cd86bd2d50dbd6.css?body=1" for ::1 at 2015-06-22 08:31:00 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:31:00 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:31:00 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:31:00 -0400
+
+
+Started GET "/surveys" for ::1 at 2015-06-22 08:31:20 -0400
+Processing by SurveysController#index as HTML
+  [1m[35mSurvey Load (0.3ms)[0m  SELECT "surveys".* FROM "surveys"
+  Rendered surveys/index.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 17ms (Views: 16.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.self-39af98ba2d832f88c6e73126ca726c4c801e4d5bdfbabff504cd86bd2d50dbd6.css?body=1" for ::1 at 2015-06-22 08:31:20 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:31:20 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:31:20 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:31:20 -0400
+
+
+Started GET "/surveys" for ::1 at 2015-06-22 08:32:12 -0400
+Processing by SurveysController#index as HTML
+  [1m[36mSurvey Load (0.3ms)[0m  [1mSELECT "surveys".* FROM "surveys"[0m
+  Rendered surveys/index.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 102ms (Views: 100.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.self-3855dbeecc7192ca8c77a733a2a457717870e558fa7efcd4789d2c83715ef00a.css?body=1" for ::1 at 2015-06-22 08:32:12 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:32:12 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:32:12 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:32:12 -0400
+
+
+Started GET "/surveys/1" for ::1 at 2015-06-22 08:32:16 -0400
+Processing by SurveysController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mSurvey Load (0.3ms)[0m  SELECT  "surveys".* FROM "surveys" WHERE "surveys"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mQuestion Load (0.5ms)[0m  [1mSELECT "questions".* FROM "questions" WHERE "questions"."survey_id" = $1  ORDER BY created_at desc[0m  [["survey_id", 1]]
+  [1m[35mChoice Load (0.4ms)[0m  SELECT "choices".* FROM "choices"
+  Rendered surveys/show.html.erb within layouts/application (15.7ms)
+Completed 200 OK in 106ms (Views: 92.0ms | ActiveRecord: 3.8ms)
+
+
+Started GET "/surveys" for ::1 at 2015-06-22 08:32:17 -0400
+Processing by SurveysController#index as HTML
+  [1m[36mSurvey Load (0.3ms)[0m  [1mSELECT "surveys".* FROM "surveys"[0m
+  Rendered surveys/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 19ms (Views: 17.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/users/1" for ::1 at 2015-06-22 08:32:19 -0400
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mSurvey Load (0.2ms)[0m  [1mSELECT "surveys".* FROM "surveys" WHERE "surveys"."creator_id" = $1[0m  [["creator_id", 1]]
+  [1m[35mCompletedsurvey Load (0.2ms)[0m  SELECT "completedsurveys".* FROM "completedsurveys" WHERE "completedsurveys"."survey_id" = $1  [["survey_id", 1]]
+  Rendered users/show.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 20ms (Views: 18.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/surveys/1/edit" for ::1 at 2015-06-22 08:32:20 -0400
+Processing by SurveysController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSurvey Load (0.3ms)[0m  [1mSELECT  "surveys".* FROM "surveys" WHERE "surveys"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mQuestion Load (0.3ms)[0m  SELECT "questions".* FROM "questions" WHERE "questions"."survey_id" = $1  ORDER BY created_at desc  [["survey_id", 1]]
+  [1m[36mChoice Load (0.2ms)[0m  [1mSELECT "choices".* FROM "choices"[0m
+  Rendered surveys/edit.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 24ms (Views: 21.7ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/surveys/1/edit" for ::1 at 2015-06-22 08:32:28 -0400
+Processing by SurveysController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mSurvey Load (0.3ms)[0m  SELECT  "surveys".* FROM "surveys" WHERE "surveys"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mQuestion Load (0.3ms)[0m  [1mSELECT "questions".* FROM "questions" WHERE "questions"."survey_id" = $1  ORDER BY created_at desc[0m  [["survey_id", 1]]
+  [1m[35mChoice Load (0.4ms)[0m  SELECT "choices".* FROM "choices"
+  Rendered surveys/edit.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 25ms (Views: 21.6ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:32:28 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:32:28 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:32:28 -0400
+
+
+Started GET "/assets/application.self-3855dbeecc7192ca8c77a733a2a457717870e558fa7efcd4789d2c83715ef00a.css?body=1" for ::1 at 2015-06-22 08:32:28 -0400
+
+
+Started GET "/surveys/1/edit" for ::1 at 2015-06-22 08:32:30 -0400
+Processing by SurveysController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSurvey Load (0.3ms)[0m  [1mSELECT  "surveys".* FROM "surveys" WHERE "surveys"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mQuestion Load (0.3ms)[0m  SELECT "questions".* FROM "questions" WHERE "questions"."survey_id" = $1  ORDER BY created_at desc  [["survey_id", 1]]
+  [1m[36mChoice Load (0.3ms)[0m  [1mSELECT "choices".* FROM "choices"[0m
+  Rendered surveys/edit.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 22ms (Views: 18.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/application.self-3855dbeecc7192ca8c77a733a2a457717870e558fa7efcd4789d2c83715ef00a.css?body=1" for ::1 at 2015-06-22 08:32:30 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:32:30 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:32:30 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:32:30 -0400
+
+
+Started GET "/surveys/1/edit" for ::1 at 2015-06-22 08:33:11 -0400
+Processing by SurveysController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mSurvey Load (0.5ms)[0m  SELECT  "surveys".* FROM "surveys" WHERE "surveys"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mQuestion Load (0.3ms)[0m  [1mSELECT "questions".* FROM "questions" WHERE "questions"."survey_id" = $1  ORDER BY created_at desc[0m  [["survey_id", 1]]
+  [1m[35mChoice Load (0.3ms)[0m  SELECT "choices".* FROM "choices"
+  Rendered surveys/edit.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 107ms (Views: 102.6ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/assets/application.self-d6b1c4fa525f682d602169271ba47da537b95bfbd281378c3d03cd0a7fd11d6f.css?body=1" for ::1 at 2015-06-22 08:33:11 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:33:11 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:33:11 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:33:11 -0400
+
+
+Started GET "/surveys/1/edit" for ::1 at 2015-06-22 08:33:22 -0400
+Processing by SurveysController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSurvey Load (0.3ms)[0m  [1mSELECT  "surveys".* FROM "surveys" WHERE "surveys"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mQuestion Load (0.3ms)[0m  SELECT "questions".* FROM "questions" WHERE "questions"."survey_id" = $1  ORDER BY created_at desc  [["survey_id", 1]]
+  [1m[36mChoice Load (0.2ms)[0m  [1mSELECT "choices".* FROM "choices"[0m
+  Rendered surveys/edit.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 27ms (Views: 23.9ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/application.self-3855dbeecc7192ca8c77a733a2a457717870e558fa7efcd4789d2c83715ef00a.css?body=1" for ::1 at 2015-06-22 08:33:22 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:33:22 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:33:22 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:33:22 -0400
+
+
+Started GET "/surveys/1/edit" for ::1 at 2015-06-22 08:33:35 -0400
+Processing by SurveysController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mSurvey Load (0.2ms)[0m  SELECT  "surveys".* FROM "surveys" WHERE "surveys"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mQuestion Load (0.2ms)[0m  [1mSELECT "questions".* FROM "questions" WHERE "questions"."survey_id" = $1  ORDER BY created_at desc[0m  [["survey_id", 1]]
+  [1m[35mChoice Load (0.5ms)[0m  SELECT "choices".* FROM "choices"
+  Rendered surveys/edit.html.erb within layouts/application (5.7ms)
+Completed 200 OK in 24ms (Views: 21.4ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:33:35 -0400
+
+
+Started GET "/assets/application.self-3855dbeecc7192ca8c77a733a2a457717870e558fa7efcd4789d2c83715ef00a.css?body=1" for ::1 at 2015-06-22 08:33:35 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:33:35 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:33:35 -0400
+
+
+Started GET "/surveys/1/edit" for ::1 at 2015-06-22 08:33:41 -0400
+Processing by SurveysController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSurvey Load (0.3ms)[0m  [1mSELECT  "surveys".* FROM "surveys" WHERE "surveys"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mQuestion Load (0.3ms)[0m  SELECT "questions".* FROM "questions" WHERE "questions"."survey_id" = $1  ORDER BY created_at desc  [["survey_id", 1]]
+  [1m[36mChoice Load (0.9ms)[0m  [1mSELECT "choices".* FROM "choices"[0m
+  Rendered surveys/edit.html.erb within layouts/application (6.0ms)
+Completed 200 OK in 92ms (Views: 88.0ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/assets/application.self-3855dbeecc7192ca8c77a733a2a457717870e558fa7efcd4789d2c83715ef00a.css?body=1" for ::1 at 2015-06-22 08:33:41 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:33:41 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:33:41 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:33:41 -0400
+
+
+Started GET "/surveys/1/edit" for ::1 at 2015-06-22 08:33:50 -0400
+Processing by SurveysController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mSurvey Load (0.2ms)[0m  SELECT  "surveys".* FROM "surveys" WHERE "surveys"."id" = $1 LIMIT 1  [["id", 1]]
+  [1m[36mQuestion Load (0.3ms)[0m  [1mSELECT "questions".* FROM "questions" WHERE "questions"."survey_id" = $1  ORDER BY created_at desc[0m  [["survey_id", 1]]
+  [1m[35mChoice Load (0.3ms)[0m  SELECT "choices".* FROM "choices"
+  Rendered surveys/edit.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 27ms (Views: 23.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/application.self-3855dbeecc7192ca8c77a733a2a457717870e558fa7efcd4789d2c83715ef00a.css?body=1" for ::1 at 2015-06-22 08:33:50 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:33:50 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:33:50 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:33:50 -0400
+
+
+Started GET "/surveys/1/edit" for ::1 at 2015-06-22 08:34:13 -0400
+Processing by SurveysController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mSurvey Load (0.2ms)[0m  [1mSELECT  "surveys".* FROM "surveys" WHERE "surveys"."id" = $1 LIMIT 1[0m  [["id", 1]]
+  [1m[35mQuestion Load (0.2ms)[0m  SELECT "questions".* FROM "questions" WHERE "questions"."survey_id" = $1  ORDER BY created_at desc  [["survey_id", 1]]
+  [1m[36mChoice Load (0.3ms)[0m  [1mSELECT "choices".* FROM "choices"[0m
+  Rendered surveys/edit.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 21ms (Views: 18.7ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/application.self-3855dbeecc7192ca8c77a733a2a457717870e558fa7efcd4789d2c83715ef00a.css?body=1" for ::1 at 2015-06-22 08:34:13 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:34:13 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:34:13 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:34:13 -0400
+
+
+Started GET "/surveys" for ::1 at 2015-06-22 08:34:32 -0400
+Processing by SurveysController#index as HTML
+  [1m[35mSurvey Load (0.3ms)[0m  SELECT "surveys".* FROM "surveys"
+  Rendered surveys/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 18ms (Views: 16.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/surveys/new" for ::1 at 2015-06-22 08:34:33 -0400
+Processing by SurveysController#new as HTML
+  [1m[36mQuestion Load (0.3ms)[0m  [1mSELECT "questions".* FROM "questions"[0m
+  Rendered questions/_question.html.erb (0.5ms)
+  [1m[35mChoice Load (0.3ms)[0m  SELECT "choices".* FROM "choices"
+  Rendered choices/_choice.html.erb (0.5ms)
+  Rendered surveys/new.html.erb within layouts/application (7.7ms)
+Completed 200 OK in 23ms (Views: 21.9ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/surveys/new" for ::1 at 2015-06-22 08:34:48 -0400
+Processing by SurveysController#new as HTML
+  [1m[36mQuestion Load (0.3ms)[0m  [1mSELECT "questions".* FROM "questions"[0m
+  Rendered questions/_question.html.erb (0.1ms)
+  [1m[35mChoice Load (0.3ms)[0m  SELECT "choices".* FROM "choices"
+  Rendered choices/_choice.html.erb (0.1ms)
+  Rendered surveys/new.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 22ms (Views: 20.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/application.self-3855dbeecc7192ca8c77a733a2a457717870e558fa7efcd4789d2c83715ef00a.css?body=1" for ::1 at 2015-06-22 08:34:48 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:34:48 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:34:48 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:34:48 -0400
+
+
+Started GET "/surveys/new" for ::1 at 2015-06-22 08:35:04 -0400
+Processing by SurveysController#new as HTML
+  [1m[36mQuestion Load (0.4ms)[0m  [1mSELECT "questions".* FROM "questions"[0m
+  Rendered questions/_question.html.erb (0.2ms)
+  [1m[35mChoice Load (0.3ms)[0m  SELECT "choices".* FROM "choices"
+  Rendered choices/_choice.html.erb (0.1ms)
+  Rendered surveys/new.html.erb within layouts/application (7.3ms)
+Completed 200 OK in 101ms (Views: 99.7ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:35:04 -0400
+
+
+Started GET "/assets/application.self-3855dbeecc7192ca8c77a733a2a457717870e558fa7efcd4789d2c83715ef00a.css?body=1" for ::1 at 2015-06-22 08:35:04 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:35:04 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:35:04 -0400
+
+
+Started GET "/surveys/new" for ::1 at 2015-06-22 08:35:18 -0400
+Processing by SurveysController#new as HTML
+  [1m[36mQuestion Load (0.3ms)[0m  [1mSELECT "questions".* FROM "questions"[0m
+  Rendered questions/_question.html.erb (0.1ms)
+  [1m[35mChoice Load (0.3ms)[0m  SELECT "choices".* FROM "choices"
+  Rendered choices/_choice.html.erb (0.2ms)
+  Rendered surveys/new.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 25ms (Views: 23.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/application.self-3855dbeecc7192ca8c77a733a2a457717870e558fa7efcd4789d2c83715ef00a.css?body=1" for ::1 at 2015-06-22 08:35:18 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:35:18 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:35:18 -0400
+
+
+Started GET "/assets/application.self-8b772360368f94eaff3edb2333c358a197d1aeb2b7488e4fe5cab7f0768eea0e.js?body=1" for ::1 at 2015-06-22 08:35:18 -0400
+
+
+Started GET "/surveys/new" for ::1 at 2015-06-22 08:35:59 -0400
+Processing by SurveysController#new as HTML
+  [1m[36mQuestion Load (0.3ms)[0m  [1mSELECT "questions".* FROM "questions"[0m
+  Rendered questions/_question.html.erb (0.1ms)
+  [1m[35mChoice Load (0.3ms)[0m  SELECT "choices".* FROM "choices"
+  Rendered choices/_choice.html.erb (0.1ms)
+  Rendered surveys/new.html.erb within layouts/application (5.5ms)
+Completed 200 OK in 136ms (Views: 134.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/application.self-3855dbeecc7192ca8c77a733a2a457717870e558fa7efcd4789d2c83715ef00a.css?body=1" for ::1 at 2015-06-22 08:35:59 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:35:59 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:35:59 -0400
+
+
+Started GET "/assets/application.self-4c98417661d28aebc5f4e51672f3ee3b42e9afb34d9622fa211acf8d840a9be6.js?body=1" for ::1 at 2015-06-22 08:35:59 -0400
+
+
+Started GET "/surveys/new" for ::1 at 2015-06-22 08:36:55 -0400
+Processing by SurveysController#new as HTML
+  [1m[36mQuestion Load (0.3ms)[0m  [1mSELECT "questions".* FROM "questions"[0m
+  Rendered questions/_question.html.erb (0.2ms)
+  [1m[35mChoice Load (0.3ms)[0m  SELECT "choices".* FROM "choices"
+  Rendered choices/_choice.html.erb (0.1ms)
+  Rendered surveys/new.html.erb within layouts/application (6.6ms)
+Completed 200 OK in 100ms (Views: 97.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/application.self-8ff4fea60fb51eba2f772cacdae1485c79a54fc709b4877d858700850cdeda54.css?body=1" for ::1 at 2015-06-22 08:36:55 -0400
+
+
+Started GET "/assets/application.self-4c98417661d28aebc5f4e51672f3ee3b42e9afb34d9622fa211acf8d840a9be6.js?body=1" for ::1 at 2015-06-22 08:36:55 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:36:55 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:36:55 -0400
+
+
+Started GET "/surveys/new" for ::1 at 2015-06-22 08:37:01 -0400
+Processing by SurveysController#new as HTML
+  [1m[36mQuestion Load (0.4ms)[0m  [1mSELECT "questions".* FROM "questions"[0m
+  Rendered questions/_question.html.erb (0.1ms)
+  [1m[35mChoice Load (0.3ms)[0m  SELECT "choices".* FROM "choices"
+  Rendered choices/_choice.html.erb (0.1ms)
+  Rendered surveys/new.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 39ms (Views: 37.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/application.self-5f0a7bfcdfbf1e040ed2b73cc08c25a51878b52b1936078d59bb5fdc96c1ac84.css?body=1" for ::1 at 2015-06-22 08:37:01 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:37:01 -0400
+
+
+Started GET "/assets/application.self-4c98417661d28aebc5f4e51672f3ee3b42e9afb34d9622fa211acf8d840a9be6.js?body=1" for ::1 at 2015-06-22 08:37:01 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:37:01 -0400
+
+
+Started GET "/surveys/new" for ::1 at 2015-06-22 08:37:07 -0400
+Processing by SurveysController#new as HTML
+  [1m[36mQuestion Load (0.3ms)[0m  [1mSELECT "questions".* FROM "questions"[0m
+  Rendered questions/_question.html.erb (0.2ms)
+  [1m[35mChoice Load (0.4ms)[0m  SELECT "choices".* FROM "choices"
+  Rendered choices/_choice.html.erb (0.1ms)
+  Rendered surveys/new.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 38ms (Views: 35.6ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:37:07 -0400
+
+
+Started GET "/assets/application.self-4c98417661d28aebc5f4e51672f3ee3b42e9afb34d9622fa211acf8d840a9be6.js?body=1" for ::1 at 2015-06-22 08:37:07 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:37:07 -0400
+
+
+Started GET "/assets/application.self-962102b6e0456d186932bbd5c9be9360bf1b1715f9d5204b68b3f836697a2a08.css?body=1" for ::1 at 2015-06-22 08:37:07 -0400
+
+
+Started GET "/surveys/new" for ::1 at 2015-06-22 08:37:13 -0400
+Processing by SurveysController#new as HTML
+  [1m[36mQuestion Load (0.4ms)[0m  [1mSELECT "questions".* FROM "questions"[0m
+  Rendered questions/_question.html.erb (0.2ms)
+  [1m[35mChoice Load (0.5ms)[0m  SELECT "choices".* FROM "choices"
+  Rendered choices/_choice.html.erb (0.1ms)
+  Rendered surveys/new.html.erb within layouts/application (7.3ms)
+Completed 200 OK in 105ms (Views: 102.8ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/assets/application.self-c3a28f02ec671b9bb06b4c7c0cb708790da1315849d4e8ce1fc7b7d97c146915.css?body=1" for ::1 at 2015-06-22 08:37:13 -0400
+
+
+Started GET "/assets/application.self-4c98417661d28aebc5f4e51672f3ee3b42e9afb34d9622fa211acf8d840a9be6.js?body=1" for ::1 at 2015-06-22 08:37:13 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:37:13 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:37:13 -0400
+
+
+Started GET "/surveys/new" for ::1 at 2015-06-22 08:37:24 -0400
+Processing by SurveysController#new as HTML
+  [1m[36mQuestion Load (0.4ms)[0m  [1mSELECT "questions".* FROM "questions"[0m
+  Rendered questions/_question.html.erb (0.1ms)
+  [1m[35mChoice Load (0.3ms)[0m  SELECT "choices".* FROM "choices"
+  Rendered choices/_choice.html.erb (0.1ms)
+  Rendered surveys/new.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 104ms (Views: 102.2ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/application.self-ac0b1fffc9cdd1cd2bd3bf50b3c6fe70aea42bda2d70fd1c945f413d7eb5c279.css?body=1" for ::1 at 2015-06-22 08:37:24 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:37:24 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:37:24 -0400
+
+
+Started GET "/assets/application.self-4c98417661d28aebc5f4e51672f3ee3b42e9afb34d9622fa211acf8d840a9be6.js?body=1" for ::1 at 2015-06-22 08:37:24 -0400
+
+
+Started GET "/surveys/new" for ::1 at 2015-06-22 08:37:31 -0400
+Processing by SurveysController#new as HTML
+  [1m[36mQuestion Load (0.3ms)[0m  [1mSELECT "questions".* FROM "questions"[0m
+  Rendered questions/_question.html.erb (0.1ms)
+  [1m[35mChoice Load (0.4ms)[0m  SELECT "choices".* FROM "choices"
+  Rendered choices/_choice.html.erb (0.1ms)
+  Rendered surveys/new.html.erb within layouts/application (5.1ms)
+Completed 200 OK in 25ms (Views: 23.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:37:31 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:37:31 -0400
+
+
+Started GET "/assets/application.self-4c98417661d28aebc5f4e51672f3ee3b42e9afb34d9622fa211acf8d840a9be6.js?body=1" for ::1 at 2015-06-22 08:37:31 -0400
+
+
+Started GET "/assets/application.self-ac0b1fffc9cdd1cd2bd3bf50b3c6fe70aea42bda2d70fd1c945f413d7eb5c279.css?body=1" for ::1 at 2015-06-22 08:37:31 -0400
+
+
+Started GET "/surveys/new" for ::1 at 2015-06-22 08:37:42 -0400
+Processing by SurveysController#new as HTML
+  [1m[36mQuestion Load (0.3ms)[0m  [1mSELECT "questions".* FROM "questions"[0m
+  Rendered questions/_question.html.erb (0.1ms)
+  [1m[35mChoice Load (0.2ms)[0m  SELECT "choices".* FROM "choices"
+  Rendered choices/_choice.html.erb (0.1ms)
+  Rendered surveys/new.html.erb within layouts/application (4.1ms)
+Completed 200 OK in 19ms (Views: 17.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/application.self-ac0b1fffc9cdd1cd2bd3bf50b3c6fe70aea42bda2d70fd1c945f413d7eb5c279.css?body=1" for ::1 at 2015-06-22 08:37:42 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:37:42 -0400
+
+
+Started GET "/assets/application.self-4c98417661d28aebc5f4e51672f3ee3b42e9afb34d9622fa211acf8d840a9be6.js?body=1" for ::1 at 2015-06-22 08:37:42 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:37:42 -0400
+
+
+Started GET "/surveys/new" for ::1 at 2015-06-22 08:38:10 -0400
+Processing by SurveysController#new as HTML
+  [1m[36mQuestion Load (0.3ms)[0m  [1mSELECT "questions".* FROM "questions"[0m
+  Rendered questions/_question.html.erb (0.1ms)
+  [1m[35mChoice Load (0.5ms)[0m  SELECT "choices".* FROM "choices"
+  Rendered choices/_choice.html.erb (0.1ms)
+  Rendered surveys/new.html.erb within layouts/application (4.3ms)
+Completed 200 OK in 20ms (Views: 19.0ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/application.self-ac0b1fffc9cdd1cd2bd3bf50b3c6fe70aea42bda2d70fd1c945f413d7eb5c279.css?body=1" for ::1 at 2015-06-22 08:38:10 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:38:10 -0400
+
+
+Started GET "/assets/application.self-4c98417661d28aebc5f4e51672f3ee3b42e9afb34d9622fa211acf8d840a9be6.js?body=1" for ::1 at 2015-06-22 08:38:10 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:38:10 -0400
+
+
+Started GET "/surveys" for ::1 at 2015-06-22 08:38:17 -0400
+Processing by SurveysController#index as HTML
+  [1m[36mSurvey Load (0.3ms)[0m  [1mSELECT "surveys".* FROM "surveys"[0m
+  Rendered surveys/index.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 89ms (Views: 88.0ms | ActiveRecord: 0.3ms)
+
+
+Started DELETE "/logout" for ::1 at 2015-06-22 08:38:20 -0400
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"gfE+6RKYvH2ncrwfLjW2LJIqW8mmBCnh23VcP5tNEa+zsEC7J6ouI0/ZWz+GtGjfNhN1Hy+HDKvvRowC1dvSlQ=="}
+Redirected to http://localhost:3000/surveys
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/surveys" for ::1 at 2015-06-22 08:38:20 -0400
+Processing by SurveysController#index as HTML
+Redirected to http://localhost:3000/login
+Filter chain halted as :require_logged_in rendered or redirected
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for ::1 at 2015-06-22 08:38:20 -0400
+Processing by SessionsController#new as HTML
+  Rendered sessions/_form.html.erb (1.2ms)
+  Rendered sessions/new.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 18ms (Views: 18.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for ::1 at 2015-06-22 08:39:20 -0400
+Processing by SessionsController#new as HTML
+  Rendered sessions/_form.html.erb (1.1ms)
+  Rendered sessions/new.html.erb within layouts/application (1.7ms)
+Completed 200 OK in 20ms (Views: 19.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.self-ac0b1fffc9cdd1cd2bd3bf50b3c6fe70aea42bda2d70fd1c945f413d7eb5c279.css?body=1" for ::1 at 2015-06-22 08:39:20 -0400
+
+
+Started GET "/assets/jquery.self-d03a5518f45df77341bdbe6201ba3bfa547ebba8ed64f0ea56bfa5f96ea7c074.js?body=1" for ::1 at 2015-06-22 08:39:20 -0400
+
+
+Started GET "/assets/jquery_ujs.self-ca5248a2fad13d6bd58ea121318d642f195f0b2dd818b30615f785ff365e8d1f.js?body=1" for ::1 at 2015-06-22 08:39:20 -0400
+
+
+Started GET "/assets/application.self-4c98417661d28aebc5f4e51672f3ee3b42e9afb34d9622fa211acf8d840a9be6.js?body=1" for ::1 at 2015-06-22 08:39:20 -0400
+
+
+Started POST "/login" for ::1 at 2015-06-22 08:39:24 -0400
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Ool733oQsEygZndbvrHdLAccm4YTk113KzwSfAUSpwEIyAWNTyIiEkjNkHsWMAPfoyW1UJoQeD0fD8JBS4RkOw==", "session"=>{"username"=>"mike", "password"=>"[FILTERED]"}, "commit"=>"Log in"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."username" = $1 LIMIT 1  [["username", "mike"]]
+Redirected to http://localhost:3000/surveys
+Completed 302 Found in 98ms (ActiveRecord: 1.8ms)
+
+
+Started GET "/surveys" for ::1 at 2015-06-22 08:39:24 -0400
+Processing by SurveysController#index as HTML
+  [1m[36mSurvey Load (0.3ms)[0m  [1mSELECT "surveys".* FROM "surveys"[0m
+  Rendered surveys/index.html.erb within layouts/application (9.5ms)
+Completed 200 OK in 31ms (Views: 23.2ms | ActiveRecord: 1.8ms)
+
+
+Started DELETE "/logout" for ::1 at 2015-06-22 08:39:27 -0400
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"x275llBjuDFWOhKRUyflI72r2MYmpdMoD5BG3VhTREz1L4fEZVEqb76R9bH7pjvQGZL2EK8m9mI7o5bgFsWHdg=="}
+Redirected to http://localhost:3000/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/" for ::1 at 2015-06-22 08:39:27 -0400
+Processing by IndexController#index as HTML
+  Rendered index/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 19ms (Views: 18.4ms | ActiveRecord: 0.0ms)

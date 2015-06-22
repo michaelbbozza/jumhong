@@ -1,6 +1,8 @@
 <%=button_to 'Back to Main Page', surveys_path, method: :get%>
+<%= button_to "Logout", logout_path, method: :delete, :class => :destroy, id: "logout_button" %>
+<%= button_to "Delete Account", new_user_path, method: :delete, :class => :destroy %>
 
-
+<div id="user_profile">
 <h2><%= @user.username %></h2>
 
 <% @user.surveys.each do |sur| %>
@@ -10,12 +12,10 @@
       <%=button_to 'Completed Survey',  survey_completedsurveys_path(survey_id: sur.id), method: :get%>
     <%end%>
   <%end%>
-  <% if sur.creator_id == session[:user_id] %>
-  <%= button_to "edit", edit_survey_path(id: sur.id), method: :get%>
-  <%= button_to "delete", survey_path(id: sur.id), method: :delete %><br><br>
+  <% if sur.creator_id == session[:user_id] %><br>
+    <%= button_to "edit", edit_survey_path(id: sur.id), method: :get%><br>
+    <%= button_to "delete", survey_path(id: sur.id), method: :delete %><br><br>
   <% end %>
 <% end %>
+</div>
 
-<%= button_to "Logout", logout_path, method: :delete, :class => :destroy %><br><br>
-
-<%= button_to "Delete Account", new_user_path, method: :delete, :class => :destroy %>

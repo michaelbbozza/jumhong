@@ -56,7 +56,7 @@ $(document).ready(function() {
             data: $("form").serialize()
           })
           .done(function(choicePartial) {
-            $(".mothafucka").append(choicePartial);
+            $(".choices").append(choicePartial);
             $('#add-choice-form').hide();
             console.log(choicePartial)
           })

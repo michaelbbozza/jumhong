@@ -1,7 +1,10 @@
-<%=button_to 'Log Out', logout_path, method: :delete%>
+<%=button_to 'Log Out', logout_path, method: :delete%><br>
+<%=button_to 'User Profile', user_path(id: session[:user_id]), method: :get%>
+
+<div class="surveys">
 <h4> AVAILABLE SURVEYS </h4>
 <%=button_to 'Create a survey', new_survey_path, method: :get %>
-<%=button_to 'User Profile', user_path(id: session[:user_id]), method: :get%>
+</div>
 
 <% @surveys.each do |survey| %>
   <ul>

@@ -1,5 +1,5 @@
 <%=button_to 'Back to Main Page', surveys_path, method: :get%>
-
+<div class = "surveys">
 <h4> CREATE A SURVEY </h4>
 <%= form_for @survey do |f| %>
   Title: <%= f.text_field :title %>
@@ -13,7 +13,7 @@
     <%= render 'questions/question', question: question%><br>
   <% @choices.each do |choice|%>
     <%if question.id == choice.question_id%>
-    <ol class="mothafucka">
+    <ol class="choices">
       <%= render 'choices/choice', choice: choice%><br><br>
     </ol>
     <%end%>
@@ -24,3 +24,4 @@
 
 <%=button_to 'Add a question',new_question_path, id: 'add-question',method: :get%><br>
 <%=button_to 'Add a choice', new_survey_path, id: 'add-choice', method: :get%><br>
+</div>
